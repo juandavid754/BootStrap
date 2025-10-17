@@ -1,0 +1,63 @@
+body {
+    background-color: rgb(255, 243, 229);
+}
+
+.carrito {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #fff;
+    border: 2px solid rgb(211, 153, 99);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.carrito-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    background-color: rgb(182, 125, 68);
+    color: beige;
+}
+
+.carrito-header img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.carrito-item img {
+    width: 60px;
+    height: auto;
+}
+
+.btn-remove {
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.btn-remove:hover {
+    color: red;
+}
+
+.total {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: right;
+    padding: 20px;
+}
+
+.botones {
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.botones button {
+    width: 48%;
+    font-weight: bold;
+}

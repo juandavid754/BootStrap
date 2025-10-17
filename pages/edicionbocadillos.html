@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cantidad de Bocadillos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/ingredientes.css">
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <div class="menu">
+        <a href="index.html">
+            <h1 class="carta">CARTA</h1>
+        </a>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="bebidas.html">BEBIDAS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="bocadillos.html">BOCADILLOS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="pulgas.html">PULGAS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="sandwiches.html">SANDWICHES</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="croissants.html">CROISSANTS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="bebidascalientes.html">BEBIDAS CALIENTES</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="varios.html">VARIOS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link volver" href="index.html">VOLVER</a>
+            </li>
+            <li class="carritocompra">
+                <a class="nav-link" href="carritocompra.html"><img src="../images/carritocompra.png" height="100"></a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <div class="container text-center mt-4">
+            <h5 class="cantidadtitle">CANTIDAD</h5>
+            <div class="input-group mx-auto cantidad" style="max-width: 160px;">
+                <button class="btn btn-outline-warning" type="button" id="btn-minus">−</button>
+                <input type="number" class="form-control text-center" id="quantity" value="1" min="1">
+                <button class="btn btn-outline-warning" type="button" id="btn-plus">+</button>
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            <div class="row justify-content-center g-4">
+                <div class="col-md-4 d-flex justify-content-center">
+                    <div class="card">
+                        <img src="../images/alioli.png" class="card-img-top" alt="..." height="254px">
+                        <div class="card-body">
+                            <h5 class="card-title">ALIOLI</h5>
+                            <p class="card-text">+0,15€ POR RACIÓN</p>
+                            <p class="agregar">AÑADIR</p>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkAlioli">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 d-flex justify-content-center">
+                    <div class="card">
+                        <img src="../images/quesoloncha.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">QUESO LONCHA</h5>
+                            <p class="card-text">+0,20€ POR RACIÓN</p>
+                            <div class="radio">
+                                <div class="radio-item">
+                                    <p class="agregar">AÑADIR</p>
+                                    <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1"
+                                        checked>
+                                </div>
+                                <div class="radio-item">
+                                    <p class="agregar">QUITAR</p>
+                                    <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="#" class="btn btn-dark comprar">AÑADIR AL CARRITO</a>
+        </div>
+
+    </div>
+    <script>
+        const input = document.getElementById('quantity');
+        document.getElementById('btn-minus').addEventListener('click', () => {
+            if (parseInt(input.value) > parseInt(input.min)) input.value = parseInt(input.value) - 1;
+        });
+        document.getElementById('btn-plus').addEventListener('click', () => {
+            input.value = parseInt(input.value) + 1;
+        });
+    </script>
+
+</body>
+
+</html>
