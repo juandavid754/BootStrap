@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Selección - Favoritos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/bocadillos.css">
+    <style>
+        /* Estilos para el menú hamburguesa */
+        .hamburger-menu {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: #212529;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger-lines {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            transform-origin: center;
+        }
+
+        /* Animación hamburguesa a X */
+        .hamburger-menu.active .hamburger-lines:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger-menu.active .hamburger-lines:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .hamburger-lines:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Sidebar para categorías en móvil */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: #f8f9fa;
+            z-index: 999;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: #212529;
+            color: white;
+            font-weight: bold;
+        }
+
+        .sidebar-nav {
+            padding: 20px 0;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 15px 20px;
+            color: #212529;
+            text-decoration: none;
+            border-bottom: 1px solid #dee2e6;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-nav a:hover {
+            background-color: #e9ecef;
+        }
+
+        .sidebar-nav a.active {
+            background-color: #212529;
+            color: white;
+        }
+
+        /* Overlay para cerrar sidebar */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: block;
+            }
+
+            .menu {
+                display: none;
+            }
+
+            .container {
+                margin-top: 80px;
+                padding: 0 15px;
+                max-width: 100%;
+            }
+
+            /* Grid fijo para evitar solapamientos */
+            .products-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 15px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Asegurar que las tarjetas se muestren correctamente */
+            .card {
+                display: flex !important;
+                flex-direction: column !important;
+                width: 100% !important;
+                height: 280px !important;
+                border-radius: 8px !important;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+                border: 1px solid #e9ecef !important;
+                overflow: hidden !important;
+                position: relative !important;
+            }
+
+            /* Tarjetas con tamaño fijo - eliminando duplicación */
+            .card-img-top {
+                height: 140px !important;
+                width: 100% !important;
+                object-fit: contain !important;
+                object-position: center !important;
+                background-color: #f8f9fa !important;
+                padding: 8px !important;
+                flex-shrink: 0 !important;
+            }
+
+            .card-body {
+                padding: 10px !important;
+                flex-grow: 1 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                min-height: 0 !important;
+            }
+
+            .card-title {
+                font-size: 0.8rem !important;
+                margin-bottom: 8px !important;
+                line-height: 1.2 !important;
+                font-weight: bold !important;
+                text-align: center !important;
+                height: 2.4em !important;
+                overflow: hidden !important;
+                display: -webkit-box !important;
+                -webkit-line-clamp: 2 !important;
+                -webkit-box-orient: vertical !important;
+                line-clamp: 2 !important;
+            }
+
+            .card-text {
+                font-size: 1rem !important;
+                margin-bottom: 8px !important;
+                color: #28a745 !important;
+                font-weight: bold !important;
+                text-align: center !important;
+                flex-shrink: 0 !important;
+            }
+
+            .btn {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+                border-radius: 4px;
+                width: 100%;
+                margin-top: auto;
+                flex-shrink: 0;
+            }
+
+            /* Ocultar submenu cuando sidebar está activo */
+            .submenu.hidden {
+                display: none;
+            }
+
+            /* Mejorar submenu en móvil */
+            .submenu {
+                padding: 15px;
+                margin-top: 20px;
+                background-color: #f8f9fa;
+                border-top: 1px solid #dee2e6;
+            }
+
+            .submenu .btn {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+                margin-right: 15px;
+                width: auto;
+            }
+
+            .submenu .total {
+                font-size: 1rem;
+                font-weight: bold;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .sidebar {
+                display: none;
+            }
+            
+            /* Grid para escritorio */
+            .products-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 20px 0;
+            }
+            
+            .card {
+                height: 350px;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .card-img-top {
+                height: 200px;
+                object-fit: contain;
+                background-color: #f8f9fa;
+                padding: 15px;
+            }
+            
+            .card-body {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    
+    <!-- Menú hamburguesa para móvil -->
+    <button class="hamburger-menu" id="hamburger-btn">
+        <div class="hamburger-lines"></div>
+        <div class="hamburger-lines"></div>
+        <div class="hamburger-lines"></div>
+    </button>
+
+    <!-- Overlay para cerrar sidebar -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar para móvil -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            CATEGORÍAS
+        </div>
+        <div class="sidebar-nav">
+            <a href="#" onclick="loadCategory('favourites')" class="sidebar-link active">FAVORITOS</a>
+            <a href="#" onclick="loadCategory('drinks')" class="sidebar-link">BEBIDAS</a>
+            <a href="#" onclick="loadCategory('sandwiches')" class="sidebar-link">BOCADILLOS</a>
+            <a href="#" onclick="loadCategory('snacks')" class="sidebar-link">PULGAS</a>
+            <a href="#" onclick="loadCategory('croissants')" class="sidebar-link">CROISSANTS</a>
+            <a href="#" onclick="loadCategory('hotDrinks')" class="sidebar-link">BEBIDAS CALIENTES</a>
+            <a href="#" onclick="loadCategory('others')" class="sidebar-link">VARIOS</a>
+            <hr>
+            <a href="cart.html" class="sidebar-link">🛒 CARRITO</a>
+            <a href="index.html" class="sidebar-link">🏠 INICIO</a>
+        </div>
+    </div>
+
+    <!-- Menú normal para escritorio -->
+    <div class="menu">
+        <a href="index.html">
+            <h1 class="carta">CARTA</h1>
+        </a>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" onclick="loadCategory('favourites')">FAVORITOS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="loadCategory('drinks')">BEBIDAS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="loadCategory('sandwiches')">BOCADILLOS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="loadCategory('snacks')">PULGAS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="loadCategory('croissants')">CROISSANTS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="loadCategory('hotDrinks')">BEBIDAS CALIENTES</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="loadCategory('others')">VARIOS</a>
+            </li>
+            <li class="carritocompra">
+                <a class="nav-link" href="cart.html"><img src="../images/carritocompra.png" height="100"></a>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <div class="container text-center">
+            <div class="products-grid" id="products-container">
+            </div>
+        </div>
+        <div class="submenu" id="submenu">
+            <button type="button" class="btn btn-dark siguiente">SIGUIENTE</button>
+            <b class="total" id="total-display">TOTAL : 0,00€</b>
+        </div>
+    </div>
+
+    <!-- Load JavaScript files -->
+    <script src="../js/products.js"></script>
+    <script src="../js/selector.js"></script>
+    
+    <script>
+        // Variables globales para el menú
+        let hamburgerBtn, sidebar, overlay, submenu;
+
+        // JavaScript para el menú hamburguesa
+        document.addEventListener('DOMContentLoaded', function() {
+            hamburgerBtn = document.getElementById('hamburger-btn');
+            sidebar = document.getElementById('sidebar');
+            overlay = document.getElementById('overlay');
+            submenu = document.getElementById('submenu');
+
+            // Verificar que los elementos existen
+            if (!hamburgerBtn || !sidebar || !overlay || !submenu) {
+                console.error('Elementos no encontrados para el menú hamburguesa');
+                return;
+            }
+
+            // Abrir sidebar
+            hamburgerBtn.addEventListener('click', function() {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+                hamburgerBtn.classList.add('active');
+                if (window.innerWidth <= 768) {
+                    submenu.classList.add('hidden');
+                }
+            });
+
+            // Cerrar sidebar
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                hamburgerBtn.classList.remove('active');
+                submenu.classList.remove('hidden');
+            });
+
+            // Cargar favoritos por defecto o categoría de URL
+            const categoryFromUrl = getURLParameter('category');
+            const categoryToLoad = categoryFromUrl || 'favourites';
+            loadCategory(categoryToLoad);
+        });
+
+        // Función global para manejar categorías
+        function loadCategory(category) {
+            console.log('Cargando categoría:', category);
+            
+            // Cerrar sidebar si está abierto
+            if (sidebar && overlay && hamburgerBtn && submenu) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                hamburgerBtn.classList.remove('active');
+                submenu.classList.remove('hidden');
+            }
+            
+            // Actualizar enlaces activos
+            document.querySelectorAll('.sidebar-link, .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Activar el enlace correcto
+            const activeLinks = document.querySelectorAll(`[onclick="loadCategory('${category}')"]`);
+            activeLinks.forEach(link => link.classList.add('active'));
+            
+            // Cargar productos
+            console.log('Renderizando productos para:', category);
+            renderProducts(category, 'products-container');
+            
+            // Verificar si se cargaron productos
+            const container = document.getElementById('products-container');
+            console.log('Contenedor después de renderizar:', container.innerHTML.length > 0 ? 'Tiene contenido' : 'Vacío');
+            
+            // Actualizar título
+            const categoryNames = {
+                'favourites': 'Favoritos',
+                'drinks': 'Bebidas',
+                'sandwiches': 'Bocadillos', 
+                'snacks': 'Pulgas',
+                'croissants': 'Croissants',
+                'hotDrinks': 'Bebidas Calientes',
+                'others': 'Varios'
+            };
+            document.title = `Selección - ${categoryNames[category]}`;
+        }
+    </script>
+
+</body>
+
+</html>
