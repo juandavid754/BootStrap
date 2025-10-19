@@ -9,7 +9,6 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/bocadillos.css">
     <style>
-        /* Estilos para el menú hamburguesa */
         .hamburger-menu {
             display: none;
             position: fixed;
@@ -33,7 +32,6 @@
             transform-origin: center;
         }
 
-        /* Animación hamburguesa a X */
         .hamburger-menu.active .hamburger-lines:nth-child(1) {
             transform: rotate(45deg) translate(6px, 6px);
         }
@@ -46,7 +44,6 @@
             transform: rotate(-45deg) translate(6px, -6px);
         }
 
-        /* Sidebar para categorías en móvil */
         .sidebar {
             position: fixed;
             top: 0;
@@ -93,7 +90,6 @@
             color: white;
         }
 
-        /* Overlay para cerrar sidebar */
         .overlay {
             position: fixed;
             top: 0;
@@ -109,7 +105,6 @@
             display: block;
         }
 
-        /* Estilos responsivos */
         @media (max-width: 768px) {
             .hamburger-menu {
                 display: block;
@@ -125,7 +120,6 @@
                 max-width: 100%;
             }
 
-            /* Grid fijo para evitar solapamientos */
             .products-grid {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
@@ -134,12 +128,11 @@
                 padding: 0 !important;
             }
 
-            /* Asegurar que las tarjetas se muestren correctamente */
             .card {
                 display: flex !important;
                 flex-direction: column !important;
                 width: 100% !important;
-                height: 280px !important;
+                height: 320px !important;
                 border-radius: 8px !important;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
                 border: 1px solid #e9ecef !important;
@@ -147,7 +140,6 @@
                 position: relative !important;
             }
 
-            /* Tarjetas con tamaño fijo - eliminando duplicación */
             .card-img-top {
                 height: 140px !important;
                 width: 100% !important;
@@ -159,7 +151,7 @@
             }
 
             .card-body {
-                padding: 10px !important;
+                padding: 12px !important;
                 flex-grow: 1 !important;
                 display: flex !important;
                 flex-direction: column !important;
@@ -168,17 +160,19 @@
             }
 
             .card-title {
-                font-size: 0.8rem !important;
+                font-size: 1rem !important;
                 margin-bottom: 8px !important;
-                line-height: 1.2 !important;
+                line-height: 1.3 !important;
                 font-weight: bold !important;
                 text-align: center !important;
-                height: 2.4em !important;
+                height: auto !important;
+                min-height: 3.2em !important;
                 overflow: hidden !important;
                 display: -webkit-box !important;
-                -webkit-line-clamp: 2 !important;
+                -webkit-line-clamp: 3 !important;
                 -webkit-box-orient: vertical !important;
-                line-clamp: 2 !important;
+                line-clamp: 3 !important;
+                color: #212529 !important;
             }
 
             .card-text {
@@ -199,12 +193,10 @@
                 flex-shrink: 0;
             }
 
-            /* Ocultar submenu cuando sidebar está activo */
             .submenu.hidden {
                 display: none;
             }
 
-            /* Mejorar submenu en móvil */
             .submenu {
                 padding: 15px;
                 margin-top: 20px;
@@ -230,7 +222,6 @@
                 display: none;
             }
             
-            /* Grid para escritorio */
             .products-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -267,17 +258,14 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     
-    <!-- Menú hamburguesa para móvil -->
     <button class="hamburger-menu" id="hamburger-btn">
         <div class="hamburger-lines"></div>
         <div class="hamburger-lines"></div>
         <div class="hamburger-lines"></div>
     </button>
 
-    <!-- Overlay para cerrar sidebar -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Sidebar para móvil -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             CATEGORÍAS
@@ -296,7 +284,6 @@
         </div>
     </div>
 
-    <!-- Menú normal para escritorio -->
     <div class="menu">
         <a href="index.html">
             <h1 class="carta">CARTA</h1>
@@ -340,93 +327,8 @@
         </div>
     </div>
 
-    <!-- Load JavaScript files -->
     <script src="../js/products.js"></script>
     <script src="../js/selector.js"></script>
-    
-    <script>
-        // Variables globales para el menú
-        let hamburgerBtn, sidebar, overlay, submenu;
-
-        // JavaScript para el menú hamburguesa
-        document.addEventListener('DOMContentLoaded', function() {
-            hamburgerBtn = document.getElementById('hamburger-btn');
-            sidebar = document.getElementById('sidebar');
-            overlay = document.getElementById('overlay');
-            submenu = document.getElementById('submenu');
-
-            // Verificar que los elementos existen
-            if (!hamburgerBtn || !sidebar || !overlay || !submenu) {
-                console.error('Elementos no encontrados para el menú hamburguesa');
-                return;
-            }
-
-            // Abrir sidebar
-            hamburgerBtn.addEventListener('click', function() {
-                sidebar.classList.add('active');
-                overlay.classList.add('active');
-                hamburgerBtn.classList.add('active');
-                if (window.innerWidth <= 768) {
-                    submenu.classList.add('hidden');
-                }
-            });
-
-            // Cerrar sidebar
-            overlay.addEventListener('click', function() {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-                hamburgerBtn.classList.remove('active');
-                submenu.classList.remove('hidden');
-            });
-
-            // Cargar favoritos por defecto o categoría de URL
-            const categoryFromUrl = getURLParameter('category');
-            const categoryToLoad = categoryFromUrl || 'favourites';
-            loadCategory(categoryToLoad);
-        });
-
-        // Función global para manejar categorías
-        function loadCategory(category) {
-            console.log('Cargando categoría:', category);
-            
-            // Cerrar sidebar si está abierto
-            if (sidebar && overlay && hamburgerBtn && submenu) {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-                hamburgerBtn.classList.remove('active');
-                submenu.classList.remove('hidden');
-            }
-            
-            // Actualizar enlaces activos
-            document.querySelectorAll('.sidebar-link, .nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Activar el enlace correcto
-            const activeLinks = document.querySelectorAll(`[onclick="loadCategory('${category}')"]`);
-            activeLinks.forEach(link => link.classList.add('active'));
-            
-            // Cargar productos
-            console.log('Renderizando productos para:', category);
-            renderProducts(category, 'products-container');
-            
-            // Verificar si se cargaron productos
-            const container = document.getElementById('products-container');
-            console.log('Contenedor después de renderizar:', container.innerHTML.length > 0 ? 'Tiene contenido' : 'Vacío');
-            
-            // Actualizar título
-            const categoryNames = {
-                'favourites': 'Favoritos',
-                'drinks': 'Bebidas',
-                'sandwiches': 'Bocadillos', 
-                'snacks': 'Pulgas',
-                'croissants': 'Croissants',
-                'hotDrinks': 'Bebidas Calientes',
-                'others': 'Varios'
-            };
-            document.title = `Selección - ${categoryNames[category]}`;
-        }
-    </script>
 
 </body>
 
