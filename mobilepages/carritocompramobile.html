@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Carrito de la compra</title>
+    <link rel="stylesheet" href="../mobilestyles/carritocompramobile.css">
+</head>
+
+<body>
+    <div class="carrito">
+        <div class="carrito-header">
+            <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Carrito">
+            CARRITO DE LA COMPRA
+        </div>
+
+        <div class="overflow-scroll">
+            <div class="carrito-item d-flex align-items-center justify-content-between px-4 py-3 border-bottom">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="../images/colacao.png" alt="Cola Cao">
+                    <strong class="nombre">COLA-CAO</strong>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <span class="fw-bold cantidad">X 1</span>
+                    <span class="fw-bold precio">1,00€</span>
+                    <button class="btn-remove">✕</button>
+                </div>
+            </div>
+
+            <div class="carrito-item d-flex align-items-center justify-content-between px-4 py-3 border-bottom">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="../images/bocadillopollo.png" alt="Bocadillo">
+                    <strong class="nombre">BOCADILLO DE POLLO</strong>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <span class="fw-bold cantidad">X 3</span>
+                    <span class="fw-bold precio">2,00€</span>
+                    <button class="btn-remove">✕</button>
+                </div>
+            </div>
+
+            <div class="carrito-item d-flex align-items-center justify-content-between px-4 py-3 border-bottom">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="../images/aguapequeña.png" alt="Agua">
+                    <strong class="nombre">AGUA 0,50L</strong>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <span class="fw-bold cantidad">X 1</span>
+                    <span class="fw-bold precio">0,50€</span>
+                    <button class="btn-remove">✕</button>
+                </div>
+            </div>
+
+            <div class="carrito-item d-flex align-items-center justify-content-between px-4 py-3 border-bottom">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="../images/cocacola.png" alt="Coca-Cola">
+                    <strong class="nombre">COCA-COLA</strong>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <span class="fw-bold cantidad">X 2</span>
+                    <span class="fw-bold precio">2,00€</span>
+                    <button class="btn-remove">✕</button>
+                </div>
+            </div>
+            <div class="carrito-item d-flex align-items-center justify-content-between px-4 py-3 border-bottom">
+                <div class="d-flex align-items-center gap-3">
+                    <img src="../images/millosgrefusatijuana.png" alt="Coca-Cola">
+                    <strong class="nombre">MILLOS GREFUSA</strong>
+                </div>
+                <div class="d-flex align-items-center gap-4">
+                    <span class="fw-bold cantidad">X 1</span>
+                    <span class="fw-bold precio">1,20€</span>
+                    <button class="btn-remove">✕</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="total px-4">
+            <div class="container contenedorpedidos">
+                <div class="row text-center gx-0 justify-content-center">
+
+                    <div class="col-sm-3 opcion-pedido">
+                        <label class="pedido">Para llevar</label>
+                        <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
+                    </div>
+
+                    <div class="col-sm-3 opcion-pedido">
+                        <label class="pedido">Comer aquí</label>
+                        <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2">
+                    </div>
+
+                    <div class="col-sm-3 total-texto">
+                        <p>TOTAL: 5,50€</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="botones px-4 pb-3 botonescarrito">
+            <button class="btn btn-dark" onclick="window.location.href='index.html'">VOLVER ATRÁS</button>
+            <button class="btn btn-dark" onclick="window.location.href='comprarealizada.html'">PAGAR</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</body>
+
+</html>
