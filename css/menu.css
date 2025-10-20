@@ -37,10 +37,11 @@
 }
 
 .card {
-  width: 20rem;
+  width: 160px;
+  width: 160px;
   border: 2px solid rgb(211, 153, 99);
   border-radius: 10px;
-  padding: 30px;
+  padding: 0.5rem;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -51,3 +52,52 @@ body {
   padding-bottom: 50px;
   background-color: rgb(255, 243, 229);
 }
+
+
+    .menu h1 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .menu img {
+      height: 50px;
+    }
+
+    .card {
+        width: 160px;
+      height: 160px;
+      padding: 0.5rem;
+    }
+
+    .card-img-top {
+      max-height: 70px;
+      object-fit: contain;
+      margin-top: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        height: auto;
+      }
+
+      .card-img-top {
+        max-height: 120px;
+      }
+
+      .card-title {
+        font-size: 1rem;
+      }
+
+      .menu h1 {
+        font-size: 2rem;
+      }
+
+      .menu img {
+        height: 100px;
+      }
+    }
