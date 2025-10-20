@@ -1,0 +1,53 @@
+.menu {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px;
+  margin: 20px 30px 0 30px;
+  width: calc(100% - 60px);
+  border: 2px solid rgb(211, 153, 99);
+  background-color: rgb(182, 125, 68);
+  border-radius: 10px;
+}
+
+.menu .nav {
+  flex: 1;
+  display: flex;
+  gap: 15px;
+}
+
+.carritocompra {
+  margin-left: auto;
+}
+
+.carta {
+  color:beige;
+  font-family: cursive;
+  padding: 15px;
+}
+
+.carta:last-child {
+  border-right: none;
+}
+
+.nav-item {
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 20rem;
+  border: 2px solid rgb(211, 153, 99);
+  border-radius: 10px;
+  padding: 30px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+body {
+  padding-bottom: 50px;
+  background-color: rgb(255, 243, 229);
+}
